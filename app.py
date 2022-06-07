@@ -8,7 +8,6 @@ import json
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost/dbbreastcancer'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:helloworld@localhost/testapp'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -29,7 +28,7 @@ def home():
     today = date.today()
     # dd/mm/YY
     d1 = today.strftime("%d/%m/%Y")
-    log = Log('carlos', d1)
+    log = Log('Rosita', d1)
     log.save()
     return render_template('index.html')
 
@@ -40,4 +39,4 @@ def breastcancer():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3113))
-    app.run(debug=True, host='localhost', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
