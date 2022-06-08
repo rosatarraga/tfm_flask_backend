@@ -1,13 +1,12 @@
 import os
 import json
-import subprocess
 import base64
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from dbBreastCancer import Logs
 from datetime import date
-
+from subprocess import run, PIPE
 from io import BytesIO
 from PIL import Image
 app = Flask(__name__)
@@ -37,11 +36,19 @@ def uploadImage():
     img = Image.open(BytesIO(decoded_img))
 
     file_name = image_name
-    img.save(file_name, "png")
+    img.save('breast_model/sample_data/images/1', "png")
 
     print("completado")
     # start job
-    subprocess.call("/breast_model/run_single.sh" + " '" + file_name + "' " + " 'R-MLO' ", shell=True)
+    p =  run("run_single.sh 'sample_data/images/2_R_MLO.png' 'R-MLO' ", stdout=PIPE, stderr=PIPE, cwd="breast_model", shell = True)
+    print( 'exit status:', p.returncode )
+    print( 'stdout:', p.stdout.decode() )
+    print( 'stderr:', p.stderr.decode() )
+    # p = run( [ 'echo', 'hello' ], stdout=PIPE, stderr=PIPE, shell = True)
+
+    # print( 'exit status:', p.returncode )
+    # print( 'stdout:', p.stdout.decode() )
+    # print( 'stderr:', p.stderr.decode() )
     # return created job id
     return 'ok'
 
