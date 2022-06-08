@@ -1,0 +1,79 @@
+<form class="home-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input [(ngModel)]="email" type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Please enter a valid
+      email address</mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is
+      <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="uploader">
+    <label class="image-upload-container btn btn-bwm" for="file-input">
+      <div class="click">Please, click in the image below to upload the file</div>
+      <img
+        src="data:image/png;base64,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">
+
+      <input id="file-input" type="file" (change)="loadFile($event)">
+    </label>
+    <div *ngIf="file" class="preview">
+      <div>
+        <label for="imageUploaded">Image uploaded successfully:</label>
+      </div>
+
+      <img id="imageUploaded" style="max-height: 300px; max-width: 300px;" [src]="url" *ngIf="url">
+    </div>
+  </div>
+
+
+
+
+
+  <button class="botonera" type="submit" [disabled]="!emailFormControl.valid || !imageSizeControl.valid || file==null"
+    mat-raised-button color="primary" (click)="processFile()">
+    Entrar
+  </button>
+
+</form>
+
+<!-- <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out your email</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="firstCtrl"  placeholder="example@domain.com">
+        <mat-error *ngIf="firstFormGroup.controls['firstCtrl'].hasError('email') && !firstFormGroup.controls['firstCtrl'].hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['firstCtrl'].hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <label class="image-upload-container btn btn-bwm">
+        <span>Select Image</span>
+        <input #imageInput
+               type="file"
+               accept="image/*"
+               (change)="processFile(imageInput)">
+      </label>
+
+      <div *ngIf="selectedFile" class="img-preview-container">
+
+        <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+             [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+        </div>
+
+        <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+          <div class="img-spinning-circle"></div>
+        </div>
+
+        <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+        <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+      </div>
+
+
+    </form> -->

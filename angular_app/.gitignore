@@ -10,7 +10,7 @@ __pycache__/dbBreastCancer.cpython-37.pyc
 /bazel-out
 
 # Node
-./angular_app/node_modules
+node_modules
 npm-debug.log
 yarn-error.log
 
