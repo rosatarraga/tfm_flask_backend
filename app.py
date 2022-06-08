@@ -1,28 +1,26 @@
-from flask import Flask, render_template, request
 import os
+import json
+import subprocess
+import base64
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from dbBreastCancer import Logs
 from datetime import date
-import json
-import base64
+
 from io import BytesIO
 from PIL import Image
 app = Flask(__name__)
 
+#database connection
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost/dbbreastcancer'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG'] = True
 db = SQLAlchemy(app)
 
-    #data = json.dumps({ 'data': request.get_json().get('email') })
-    #url = data["email"]
-    #print(request.json())
-
 @app.route('/uploadImage', methods=['POST'])
 def uploadImage():
     # get url
-    print("alguien te llama")
     data = request.form
     email = data['email']
     url = data['image']
@@ -43,7 +41,7 @@ def uploadImage():
 
     print("completado")
     # start job
-    
+    subprocess.call("/breast_model/run_single.sh" + " '" + file_name + "' " + " 'R-MLO' ", shell=True)
     # return created job id
     return 'ok'
 
@@ -53,10 +51,6 @@ def logUser(email):
     d1 = today.strftime("%d/%m/%Y")
     log = Logs(email, d1)
     log.save()
-
-@app.route('/breastcancer', methods=['GET'])
-def breastcancer():
-    return render_template('index.html')
 
 
 if __name__ == "__main__":
