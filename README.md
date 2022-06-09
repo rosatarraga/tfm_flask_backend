@@ -24,5 +24,10 @@
     
     pip freeze > requirements.txt
 
+# Launch the docker for angular app
+    docker build -t breast-cancer-angular .
+>go to the angular_app folder and build the angular doccker
+
+
 # Angular necessary information
     npm install -g @angular/cli@13.3.7 
