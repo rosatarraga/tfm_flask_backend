@@ -1,15 +1,14 @@
 # start by pulling the python image
-FROM python:3.8-alpine
+FROM python:3.7.10-alpine3.13
 
-RUN apk add --no-cache \
-            --allow-untrusted \
-            --repository \
-             http://dl-3.alpinelinux.org/alpine/edge/testing \
-            hdf5 \
-            hdf5-dev && \
-    apk add --no-cache \
-        build-base
-RUN pip install --no-cache-dir --no-binary :all: tables h5py
+RUN mkdir /app
+WORKDIR /app
+COPY requirements.txt /requirements.txt
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+RUN apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers
+RUN apk add --no-cache jpeg-dev zlib-dev mariadb-dev libffi-dev openblas-dev libgfortran lapack-dev build-base openssl-dev
+RUN apk add --no-cache hdf5-dev
+RUN pip install -r /requirements.txt
 RUN apk --no-cache del build-base
 
 # copy the requirements file into the image
