@@ -16,12 +16,18 @@ class ImageSnippet {
 })
 export class HomeComponent implements OnInit {
   email: string;
+  idPat: string;
   file: File;
   url: any;
   selectedFile: ImageSnippet;
   maxSize: number = 100000000;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  idPatFormControl = new FormControl('', Validators.required);
+  mamoFormControl = new FormControl('', Validators.required);
   imageSizeControl = new FormControl(null, FileValidator.maxContentSize(this.maxSize));
+
+  mamos: string[] = ['L-MLO', 'R-MLO','L-CC', 'R-CC'];
+    
 
   constructor(
     private _formBuilder: FormBuilder,

@@ -1,5 +1,20 @@
-<mat-toolbar color="primary">
+<div class="header" >
+  <div class="header-left">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="goToSearch()">
+        <mat-icon>content_paste_search</mat-icon>
+        <span>Examine results</span>
+      </button>
+      
+    </mat-menu>
+  </div>
+  
+
+
   <a color="secundary" [routerLink]="['/']"><span>Breast Cancer Detection</span></a>
     <span class="spacer"></span>
-</mat-toolbar>
+</div>
 

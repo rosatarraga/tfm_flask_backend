@@ -2,7 +2,11 @@
   justify-content: center;
 }
 
-
+.header {
+  overflow: hidden;
+  background-color: #673ab7;;
+  padding: 20px 10px;
+}
 
 a {
   text-decoration: none;
@@ -12,3 +16,30 @@ a {
 .mouseHover:hover {
   cursor: pointer;
 }
+
+.header-left {
+  float: left;
+}
+
+.header-left button {
+  color: #fff;
+}
+
+.header a {
+  font-weight: bold;
+  color: white;
+  font-size: 1.4rem;
+  padding-top: 20px;
+  vertical-align: -webkit-baseline-middle;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a span{
+  vertical-align: -webkit-baseline-middle;
+}
+
+
