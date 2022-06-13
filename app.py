@@ -39,8 +39,8 @@ def uploadImage():
     img.save('breast_model/sample_data/images/1', "png")
 
     print("completado")
-    # start job --> modify with the image to besaved
-    p =  run("run_single.sh 'sample_data/images/2_R_MLO.png' 'R-MLO' ", stdout=PIPE, stderr=PIPE, cwd="breast_model", shell = True)
+    # start job --> modify with the image to be saved
+    p = run("run_single.sh 'sample_data/images/2_R_MLO.png' 'R-MLO' ", stdout=PIPE, stderr=PIPE, cwd="breast_model", shell = True)
     print( 'exit status:', p.returncode )
     print( 'stdout:', p.stdout.decode() )
     print( 'stderr:', p.stderr.decode() )
