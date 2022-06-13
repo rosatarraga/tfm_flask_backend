@@ -1,28 +1,15 @@
-from flask import Flask, render_template, request, flash
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import func
+import pymongo
+from pymongo import MongoClient
+from datetime import date
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost/dbbreastcancer'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://db.sqlite3'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.secret_key = 'secret string'
+cluster = MongoClient("mongodb+srv://rosa:rosa@breastcancer.km0f51s.mongodb.net/?retryWrites=true&w=majority")
 
-db = SQLAlchemy(app)
+db = cluster["breastcancer"]
+collection = db["logs"]
 
-class Logs(db.Model):
-    id = db.Column(db.Integer, db.Identity(start=1, cycle=True), primary_key=True)
-    email = db.Column(db.String(10000), unique=False, nullable=False)
-    date = db.Column(db.DateTime(timezone=True), server_default=func.now())
-    print (email,date)
-    def __init__(self, email, date):
-        self.email = email
-        self.date = date
-    def save(self):
-        if not self.id:
-            db.session.add(self)
-        db.session.commit() 
+def createLog(email, patient_id, benign_malign, view):
+    print('creating log')
+    collection.insert_one({"email":email, "date": date.today().strftime("%d/%m/%Y"), "patient_id": patient_id, "view":view, "benign_malign": benign_malign})
 
-def returnEntries(email):
-    result = db.session.execute('SELECT * FROM logs WHERE email = ', email)
-    print (result)
+def returnEntries():
+    return 'ok'

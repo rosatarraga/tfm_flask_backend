@@ -160,6 +160,9 @@ def run(parameters):
         "malignant": float(agg_predictions[1]),
     }
     print(json.dumps(predictions_dict))
+    # Directly from dictionary
+    with open('json_data.json', 'w') as outfile:
+        json.dump(json.dumps(predictions_dict), outfile)
 
 
 def main():
@@ -199,6 +202,7 @@ def main():
         "use_hdf5": args.use_hdf5,
     }
     run(parameters)
+    
 
 
 if __name__ == "__main__":

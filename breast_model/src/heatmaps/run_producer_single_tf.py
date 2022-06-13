@@ -33,13 +33,19 @@ from tensorflow.contrib import slim
 from nets.densenet import densenet121, densenet_arg_scope
 import torch
 
-import src.data_loading.loading as loading
-import src.utilities.pickling as pickling
-import src.utilities.saving_images as saving_images
-import src.utilities.tf_utils as tf_utils
-import src.utilities.tools as tools
+sys.path.append( './src/data_loading' )
+import loading as loading
+sys.path.append( './src/utilities' )
+import pickling as pickling
+sys.path.append( './src/utilities' )
+import saving_images as saving_images
+sys.path.append( './src/utilities' )
+import tf_utils as tf_utils
+sys.path.append( './src/utilities' )
+import tools as tools
 
-import src.heatmaps.run_producer as run_producer
+sys.path.append( './src/heatmaps' )
+import run_producer as run_producer
 
 
 def construct_densenet_match_dict(tf_variables, torch_weights, tf_torch_weights_map):

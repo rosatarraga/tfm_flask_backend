@@ -25,10 +25,16 @@ TensorFlow model definition and utils
 """
 
 import tensorflow as tf
+import sys
 
-import src.modeling.layers_tf as layers
-import src.utilities.tf_utils as tf_utils
-from src.constants import VIEWS
+sys.path.append( './src/modeling' )
+import layers_tf as layers
+
+sys.path.append( './src/utilities' )
+import tf_utils as tf_utils
+
+sys.path.append( './src' )
+from constants import VIEWS
 
 DATA_FORMAT = "channels_first"
 

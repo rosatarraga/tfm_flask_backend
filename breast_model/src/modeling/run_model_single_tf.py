@@ -25,15 +25,21 @@ Runs the image only model and image+heatmaps model for breast cancer prediction.
 """
 import argparse
 import numpy as np
-import json
+import json, sys
 import tensorflow as tf
 
-import src.utilities.pickling as pickling
-import src.utilities.tf_utils as tf_utils
-import src.utilities.tools as tools
-import src.modeling.models_tf as models
-import src.data_loading.loading as loading
-from src.constants import INPUT_SIZE_DICT
+sys.path.append( './src/utilities' )
+import pickling as pickling
+sys.path.append( './src/utilities' )
+import tf_utils as tf_utils
+sys.path.append( './src/utilities' )
+import tools as tools
+sys.path.append( './src/modeling' )
+import models_tf as models
+sys.path.append( './src/data_loading' )
+import loading as loading
+sys.path.append( './src')
+from constants import INPUT_SIZE_DICT
 
 
 class ModelInput:
