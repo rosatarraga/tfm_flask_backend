@@ -22,3 +22,7 @@ class Logs(db.Model):
         if not self.id:
             db.session.add(self)
         db.session.commit() 
+
+def returnEntries(email):
+    result = db.session.execute('SELECT * FROM logs WHERE email = ', email)
+    print (result)

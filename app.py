@@ -4,7 +4,7 @@ import base64
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
-from dbBreastCancer import Logs
+from dbBreastCancer import Logs, returnEntries
 from datetime import date
 from subprocess import run, PIPE
 from io import BytesIO
@@ -54,10 +54,14 @@ def logUser(email):
     log = Logs(email, d1)
     log.save()
 
-@app.route('/home')
-def home():
+@app.route('/results')
+def results():    
     # get url
-    p = run("run_single.sh 'sample_data/images/2_R_MLO.png' 'R-MLO' ", stdout=PIPE, stderr=PIPE, cwd="breast_model", shell = True)
+    #data = request.form
+    email = "r@r.com"
+    print(email)
+    returnEntries(email)
+    
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3113))
