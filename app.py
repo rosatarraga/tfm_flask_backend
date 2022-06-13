@@ -44,11 +44,6 @@ def uploadImage():
     print( 'exit status:', p.returncode )
     print( 'stdout:', p.stdout.decode() )
     print( 'stderr:', p.stderr.decode() )
-    # p = run( [ 'echo', 'hello' ], stdout=PIPE, stderr=PIPE, shell = True)
-
-    # print( 'exit status:', p.returncode )
-    # print( 'stdout:', p.stdout.decode() )
-    # print( 'stderr:', p.stderr.decode() )
     # return created job id
     return 'ok'
 
@@ -59,6 +54,10 @@ def logUser(email):
     log = Logs(email, d1)
     log.save()
 
+@app.route('/home')
+def home():
+    # get url
+    p = run("run_single.sh 'sample_data/images/2_R_MLO.png' 'R-MLO' ", stdout=PIPE, stderr=PIPE, cwd="breast_model", shell = True)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 3113))
