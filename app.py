@@ -18,6 +18,7 @@ CORS(app)
 def uploadImage():
     # get url
     print("UPLOAAAAAAAAAD")
+
     data = request.form
     email = data['email']
     print(email)
@@ -25,8 +26,6 @@ def uploadImage():
     view = data['view']
     print(view)
     patient_id = data['patient_id']
-    print(patient_id)
-    print(email, view, patient_id)
     saveImage(url)
     benign_malign = runModel()
     createLog(email, patient_id, benign_malign, view)
