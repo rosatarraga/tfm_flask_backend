@@ -26,7 +26,7 @@ export class DataService {
   getResults(email:string): Observable<Result[]> {
     const params = new HttpParams()
       .set('email', email);
-    return this.http.get<Result[]>("http://localhost:5000/results/", {params});
+    return this.http.get<Result[]>("http://localhost:5000/results", {params});
   }
 
 }

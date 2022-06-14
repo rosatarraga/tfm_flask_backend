@@ -22,7 +22,7 @@
 
 
       <!-- RESULTS TABLE -->
-      <div style="margin-top: 20px;" >
+      <div *ngIf="results" style="margin-top: 20px;" >
         <table
         mat-table
         [dataSource]="results"

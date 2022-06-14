@@ -7,34 +7,39 @@ from datetime import date
 from subprocess import run, PIPE
 from io import BytesIO
 from PIL import Image
+from flask_cors import CORS
+
 app = Flask(__name__)
 
-#database connection
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost/dbbreastcancer'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG'] = True
-#db = SQLAlchemy(app)
+CORS(app)
 
 @app.route('/uploadImage', methods=['POST'])
 def uploadImage():
     # get url
+    print("UPLOAAAAAAAAAD")
     data = request.form
     email = data['email']
+    print(email)
     url = data['image']
     view = data['view']
+    print(view)
     patient_id = data['patient_id']
+    print(patient_id)
+    print(email, view, patient_id)
     saveImage(url)
     benign_malign = runModel()
     createLog(email, patient_id, benign_malign, view)
     return 'ok'
 
-@app.route('/results')
+@app.route('/results', methods=['GET'])
 def results():    
     # get url
-    #data = request.form    
-    email = "r@r.com"
-    print(email)
-    returnEntries(email)
+    args = request.args
+    print(args.get("email"))
+    json_data = returnEntries(args.get("email"))
+    return json_data
+    
 
 def saveImage(url):
     if "data:image/png;base64," in url:
