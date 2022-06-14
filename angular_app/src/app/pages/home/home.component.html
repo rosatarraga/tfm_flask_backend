@@ -24,7 +24,7 @@
   <div>
   <mat-form-field class="formfieldMamo" appearance="fill">
     <mat-label>Mammography view</mat-label>
-    <mat-select [formControl]="mamoFormControl">
+    <mat-select [(ngModel)]="view"  [formControl]="mamoFormControl">
       <mat-option *ngFor="let mam of mamos" [value]="mam">
         {{mam}}
       </mat-option>

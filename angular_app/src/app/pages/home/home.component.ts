@@ -17,6 +17,7 @@ class ImageSnippet {
 export class HomeComponent implements OnInit {
   email: string;
   idPat: string;
+  view: string;
   file: File;
   url: any;
   selectedFile: ImageSnippet;
@@ -41,7 +42,7 @@ export class HomeComponent implements OnInit {
 
 
   processFile() {
-    this.dataService.uploadImage(this.email, this.url).pipe(
+    this.dataService.uploadImage(this.email, this.url, this.idPat, this.view).pipe(
       tap(res => console.log(res)),
       tap(() => this.router.navigate(['/test'])),
     )
