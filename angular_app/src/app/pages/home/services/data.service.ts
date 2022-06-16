@@ -8,25 +8,26 @@ import { Result } from "../../search/interfaces/result.interface";
 })
 
 export class DataService {
-  private apiURL = 'http://localhost:5000';
+  private apiURL = 'http://127.0.0.1:3113';
 
   constructor(private http: HttpClient) {
 
   }
 
-  uploadImage(email: string, image: File, idPatient:string, view:string): Observable<any> {
+  uploadImage(email: string, image: string, idPatient:string, view:string): Observable<any> {
     const formData = new FormData();
     formData.set('image', image);
     formData.set('email', email);
     formData.set('view', view);
     formData.set('patient_id', idPatient);
-    return this.http.post<any>("http://localhost:5000/uploadImage", formData);
+    console.error(image);
+    return this.http.post<any>("http://127.0.0.1:3113/uploadImage", formData);
   }
 
   getResults(email:string): Observable<Result[]> {
     const params = new HttpParams()
       .set('email', email);
-    return this.http.get<Result[]>("http://localhost:5000/results", {params});
+    return this.http.get<Result[]>("http://127.0.0.1:3113/results", {params});
   }
 
 }

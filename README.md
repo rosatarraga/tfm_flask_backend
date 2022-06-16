@@ -14,7 +14,8 @@
 
 # Launch the docker for angular app
     docker build -t breast-cancer-angular .
->go to the angular_app folder and build the angular doccker
+    docker run  --name breast-cancer-angular -p 8000:80 -d breast-cancer-angular 
+>go to the angular_app folder and build the angular docker
 
 
 # Angular necessary information

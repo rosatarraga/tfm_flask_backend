@@ -12,13 +12,12 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 app.config['DEBUG'] = True
+app.config['MAX_CONTENT_LENGTH']= 32 * 1024 * 1024
 CORS(app)
 
 @app.route('/uploadImage', methods=['POST'])
 def uploadImage():
     # get url
-    print("UPLOAAAAAAAAAD")
-
     data = request.form
     email = data['email']
     print(email)
@@ -27,7 +26,7 @@ def uploadImage():
     print(view)
     patient_id = data['patient_id']
     saveImage(url)
-    benign_malign = runModel()
+    benign_malign = runModel(view)
     createLog(email, patient_id, benign_malign, view)
     return 'ok'
 
@@ -51,9 +50,10 @@ def saveImage(url):
     img = Image.open(BytesIO(decoded_img))
     img.save('breast_model/sample_data/images/test.png', "png")
 
-def runModel():
+def runModel(view):
     # start job --> modify with the image to be saved
-    run("run_single.sh 'sample_data/images/test.png' 'R-MLO' ", stdout=PIPE, stderr=PIPE, cwd="breast_model", shell = True)
+    string_run =  "run_single.sh 'sample_data/images/test.png' " + view
+    run(string_run, stdout=PIPE, stderr=PIPE, cwd="breast_model", shell = True)
     with open('./breast_model/json_data.json') as json_file:
         data = json.load(json_file)
         return data
