@@ -59,7 +59,7 @@
 
   <button class="botonera" type="button" [disabled]="!emailFormControl.valid || 
   !imageSizeControl.valid || !mamoFormControl.valid || !idPatFormControl.valid || file==null"
-    mat-raised-button color="primary" (click)="openDialog()">
+    mat-raised-button color="primary" (click)="processFile()">
     Send
   </button>
 

@@ -5,6 +5,7 @@ import { DataService } from 'src/app/pages/home/services/data.service';
 import { FileValidator } from 'ngx-material-file-input';
 import { tap } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Dialog } from './dialog/dialog.component';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -43,14 +44,14 @@ export class HomeComponent implements OnInit {
 
 
   processFile() {
-    
-    // this.dataService.uploadImage(this.email, this.url, this.idPat, this.view).pipe(
-    //   tap(res => console.log(res)),
-    //   tap(() => this.router.navigate(['/test'])),
-    // )
-    //   .subscribe(respuesta => {
-    //     console.log("completado");
-    //   });
+    this.openDialog();
+    this.dataService.uploadImage(this.email, this.url, this.idPat, this.view).pipe(
+      tap(res => console.log(res)),
+      tap(() => this.router.navigate(['/test'])),
+    )
+      .subscribe(respuesta => {
+        console.log("completado");
+      });
   }
 
   loadFile(event: any) {
@@ -67,23 +68,13 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(Dialog, {
+    const dialogRef = this.dialog.open(Dialog, {
       width: '250px'
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("TODO OK");
+    });
   }
-
-}
-
-@Component({
-  selector: 'dialog',
-  template: `<h1 mat-dialog-title>Please read!</h1>
-  <div mat-dialog-content>Execution of the model has been launched. After 5 minutes you could check your results in the results page.</div>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-  </div>`,
-})
-export class Dialog {
-
-  constructor(public dialogRef: MatDialogRef<Dialog>) {}
 
 }
